@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "LINESeedKR-Th";
+  src: url("../fonts/LINESeedKR-Th.ttf") format("truetype");
+}
+
+.aiservice-container{
+  position: relative;
+  top: 100px;
+  margin: auto;
+  width: 80%;
+  height: 60%;
+}
+
+.dataset{
+  background-color: rgb(245, 245, 245);
+  padding: 3%;
+  padding-left: 5%;
+  padding-bottom: 5%;
+  border-radius: 30px;
+  margin-bottom: 40px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: blue; 
+}
+
+.aiservice-container .dataset a {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.add-custom-data {
+  background-color: rgb(245, 245, 245);
+  padding: 3%;
+  padding-left: 5%;
+  padding-bottom: 5%;
+  border-radius: 30px;
+  margin-bottom: 40px;
+}
+
+.add-form input {
+padding: 5px;
+margin-right: 5px;
+}
+
+.add-form select {
+padding: 5px;
+margin-right: 5px;
+}
+
+.add-form button {
+width: 80px;
+padding: 8px;
+background-color: black;
+color: #fff;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-size: 12px;
+font-weight: bold;
+}
+
+.model-select {
+  background-color: rgb(245, 245, 245);
+  padding: 3%;
+  padding-left: 5%;
+  padding-bottom: 5%;
+  border-radius: 30px;
+}
+
+.radio-label {
+  display: block;
+  margin-bottom: 5px; 
+}

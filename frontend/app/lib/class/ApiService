@@ -1,0 +1,11 @@
+Future<http.Response> fetchData(String endpoint) async {
+  final Uri uri = Uri.parse('http://localhost:8080/$endpoint');
+  final String? token = await secureStorage.read(key: 'token');
+
+  final Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $token',
+  };
+
+  return await http.get(uri, headers: headers);
+}

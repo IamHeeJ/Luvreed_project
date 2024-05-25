@@ -1,0 +1,40 @@
+class ChatHistory {
+  final String id;
+  final int userId;
+  final int coupleId;
+  final int chatroomId;
+  final String text;
+  final String emotion;
+  final String checked;
+  final String? imgUrl;
+  final DateTime createdAt;
+  final bool sentByMe;
+
+  ChatHistory({
+    required this.id,
+    required this.userId,
+    required this.coupleId,
+    required this.chatroomId,
+    required this.text,
+    required this.emotion,
+    required this.checked,
+    this.imgUrl,
+    required this.createdAt,
+    required this.sentByMe,
+  });
+
+  factory ChatHistory.fromJson(Map<String, dynamic> json) {
+  return ChatHistory(
+    id: json['id'],
+    userId: json['userId'],
+    coupleId: json['coupleId'],
+    chatroomId: json['chatroomId'],
+    text: json['text'],
+    emotion: json['emotion'],
+    checked: json['checked'],
+    imgUrl: json['imgUrl'],
+    createdAt: DateTime.parse(json['createdAt']),
+    sentByMe: json['sentByMe'] ?? false,
+  );
+}
+}

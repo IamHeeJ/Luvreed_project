@@ -1,0 +1,110 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:luvreed/class/ChatHistory.dart';
+import 'package:luvreed/constants.dart';
+import 'package:stomp_dart_client/stomp.dart';
+
+class ChatController extends ChangeNotifier {
+  final String chatroomId;
+  final StompClient stompClient;
+  final String userId;
+  
+  ChatController(this.chatroomId, this.stompClient, this.userId);
+
+  List<ChatHistory> chatHistory = [];
+  String? _lastMessageId;
+  final int _pageSize = 20;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  late final ScrollController scrollController = ScrollController();
+  late final TextEditingController textEditingController = TextEditingController();
+  late final FocusNode focusNode = FocusNode();
+
+  Future<void> fetchChatHistory() async {
+    if (_isLoading) return;
+
+    _isLoading = true;
+    notifyListeners();
+
+    final storage = FlutterSecureStorage();
+    final token = await storage.read(key: 'token');
+
+    final response = await http.get(
+      Uri.parse('$apiBaseUrl/api/chat/$chatroomId/history'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
+    if (response.statusCode == 200) {
+      final fetchedChatHistory = (json.decode(response.body) as List)
+          .map((item) => ChatHistory.fromJson(item))
+          .toList();
+
+      chatHistory.insertAll(0, fetchedChatHistory);
+      if (fetchedChatHistory.isNotEmpty) {
+        _lastMessageId = fetchedChatHistory.first.id;
+      }
+      _isLoading = false;
+      notifyListeners();
+    } else {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  void onFieldChanged(String value) {
+    notifyListeners();
+  }
+
+  Future<void> onFieldSubmitted() async {
+    if (textEditingController.text.isEmpty || stompClient == null || userId == null) return;
+
+    final storage = FlutterSecureStorage();
+    final token = await storage.read(key: 'token');
+
+    if (chatroomId.isNotEmpty && token != null) {
+      final chatMessage = textEditingController.text;
+
+      try {
+        stompClient.send(
+          destination: '/pub/chat/$chatroomId',
+          body: json.encode({
+            'text': chatMessage,
+            'userId': userId,
+            'chatroomId': chatroomId,
+          }),
+          headers: {'Authorization': 'Bearer $token'},
+        );
+
+        final sentMessage = ChatHistory(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          userId: int.parse(userId),
+          coupleId: 0,
+          chatroomId: int.parse(chatroomId),
+          text: chatMessage,
+          emotion: '',
+          checked: '1',
+          imgUrl: null,
+          createdAt: DateTime.now(),
+          sentByMe: true,
+        );
+        chatHistory.insert(0, sentMessage);
+
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+
+        textEditingController.text = '';
+        notifyListeners();
+      } catch (e) {
+        print('Error: $e');
+      }
+    }
+  }
+
+  bool get isTextFieldEnable => textEditingController.text.isNotEmpty;
+}

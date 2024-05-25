@@ -1,0 +1,217 @@
+@font-face {
+    font-family: "LINESeedKR-Th";
+    src: url("../fonts/LINESeedKR-Th.ttf") format("truetype");
+  }
+
+.manage-container{
+    position: relative;
+    top: 100px;
+    margin: auto;
+    width: 80%;
+    height: 60%;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 5px #ebf2ff;
+}
+
+.header-content{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-title{
+    font-family: "LINESeedKR-Bd";
+    font-weight: bold;
+    font-size: 18px;
+    float: left;
+    margin-top: 10px;
+}
+
+.search-bar{
+    float: left;
+    width: 250px;
+    border-radius: 13px;
+    transition: border-color 0.3s;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #F9FBFF;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon{
+    width: 15px;
+    height: auto;
+    padding-left: 5px;
+    padding-top: 3px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+}
+
+.search-input{
+    width: 80%;
+    border: 0;
+    background-color: #F9FBFF;
+}
+
+.table-header{
+    position: absolute;
+    width: 100%;
+    height: 3.25rem;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.member-table{
+    width: 90%;
+    font-family: "LINESeedKR-Th";
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+th {
+    line-height: 3rem;
+    color: #B5B7C0;
+}
+
+th:nth-child(3) {
+    padding-right: 10%;
+}
+
+td {
+    line-height: 3rem;
+    text-align: center;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.pagination {
+    margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    
+}
+  
+.page-num {
+    font-size: 12px;
+    margin: 30px 5px;
+    padding: 5px 10px;
+    border: 1px solid #EEEEEE;
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.page-num:hover {
+    background-color: black;
+    color: white;
+}
+
+.current-page {
+    background-color: black;
+    color:white;
+}
+
+.modal{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    align-items: center;
+}
+
+.modal-content{
+    /* border: 1px solid #D9D9D9; */
+    border-radius: 20px;
+    background-color: #F5F5F5;
+    width: 500px;
+    height: 200px;
+    padding: 20px;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content p {
+    font-family: "LINESeedKR-Th";
+    font-weight: bold;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.modal-button {
+    display: flex;
+    align-items: flex-end;
+    border-top: 1px solid #D9D9D9;
+    margin-top: 73px;
+}
+
+.delete {
+    width: 50%;
+    height: 25%;
+    font-family: "LINESeedKR-Th";
+    font-weight: bold;
+    font-size: 15px;
+    color: #FF0000;
+    border-top: none;
+    border-right: 1px solid #D9D9D9;
+    border-bottom: none;
+    border-left: none;
+    padding-top: 15px;
+    padding-bottom: 12px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-bottom-left-radius: 10px;
+    background-color: #F5F5F5;
+    position: absolute;
+    top: 75%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    cursor: pointer;
+}
+
+.close {
+    width: 50%;
+    height: 25%;
+    font-family: "LINESeedKR-Th";
+    font-weight: bold;
+    font-size: 15px;
+    color: #007AFF;
+    border-top: 1px solid #D9D9D9;
+    padding-top: 15px;
+    padding-bottom: 12px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-bottom-right-radius: 10px;
+    background-color: #5e5c5c;
+    position: absolute;
+    top: 75%;
+    left: 100%;
+    transform: translate(-100%, 0%);
+    cursor: pointer;
+}
+
+.close {
+    cursor: pointer;
+    float: right;
+    border: none;
+    background-color: #F5F5F5;
+}
+
+.popupName {
+    margin-top: 45px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
